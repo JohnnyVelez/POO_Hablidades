@@ -1,0 +1,48 @@
+--Base de datos: Pospostgresql
+
+create table cursos(
+id serial,
+nombre varchar2(20),
+constraint pk_id primary key (id));
+
+create table estudiantes(
+id serial,
+nombres varchar2(20),
+apellidos varchar2(20),
+email varchar2 (20),
+constraint pk_id primary key (id));
+
+
+create table cursos_estudiantes(
+id serial
+id_cursos integer,
+id_estudiantes integer,
+constraint fk_idcursos foreign key (id_cursos) references cursos(id),
+constraint fk_estudiantes foreign key (id_estudiantes) references estudiantes(id));
+
+
+insert into public.estudiantes(nombres, apellidos, email)
+values('Maria','Lopez','marialopez@gmail.com');
+
+insert into public.estudiantes(nombres, apellidos, email)
+values('Pedro','sanchez','pedrosanchez@gmail.com');
+
+
+insert into public.estudiantes(nombres, apellidos, email)
+values('Leonel','Arteaga','leonelopez@gmail.com');
+
+
+insert into public.cursos(nombre) values ('FUNDAMENTOS DE JAVA');
+insert into  public.cursos(nombre) values ('FUNDAMENTOS DE ANDROID');
+
+Select * from cursos
+
+insert into public.cursos_estudiantes(id_cursos,id_estudiantes)
+values(1,1);
+insert into public.cursos_estudiantes(id_cursos,id_estudiantes)
+values(1,2);
+insert into public.cursos_estudiantes(id_cursos,id_estudiantes)
+values(1,);
+
+select *from cursos_estudiantes as cs inner join estudiantes as s on s.id =cs.id_estudiantes
+inner join cursos as cr on cr.id = cs.id_cursos
